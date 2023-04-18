@@ -3,7 +3,12 @@ import { GiConvergenceTarget } from "react-icons/gi";
 import { SiConvertio } from "react-icons/si";
 import { GiAlliedStar } from "react-icons/gi";
 import { TfiGallery } from "react-icons/tfi";
-import {RxCross2} from "react-icons/rx";
+import { BiMobile } from "react-icons/bi";
+import { SiSemanticweb } from "react-icons/si";
+import { BiWorld } from "react-icons/bi";
+import { BsFillImageFill } from "react-icons/bs";
+import { RiSecurePaymentFill } from "react-icons/ri";
+import { RxCross2 } from "react-icons/rx";
 import { ConvrtFunction } from "./service";
 import { saveAs } from "file-saver";
 
@@ -21,8 +26,7 @@ function App() {
     setImgName(file.name);
     setFIle(file);
     console.log(file);
-    e.target.files=null;
-
+    e.target.files = null;
   };
 
   const onConvertClick = () => {
@@ -47,17 +51,17 @@ function App() {
   };
 
   const donloadImage = () => {
-const imageNameWithoutExt = imgName.split(".")[0];
-    saveAs(ImageUrl,imageNameWithoutExt+'.'+toConvert);
+    const imageNameWithoutExt = imgName.split(".")[0];
+    saveAs(ImageUrl, imageNameWithoutExt + "." + toConvert);
   };
-  const OnCross=()=>{
+  const OnCross = () => {
     setFIle("");
     setImageUrl(false);
     setImgName("");
     setInfo("Ready");
     setToConvert("");
     setLoader(false);
-  }
+  };
 
   return (
     <div className="bg-gray-50 ">
@@ -132,7 +136,6 @@ const imageNameWithoutExt = imgName.split(".")[0];
               className="hidden"
               onChange={onChnageImage}
               accept=".jpg,.png,.gif,.avif,.tiff,.svg,.webp"
-
             />
           </label>
         </div>
@@ -204,11 +207,10 @@ const imageNameWithoutExt = imgName.split(".")[0];
                         Convert
                       </button>
                     )}
-
                   </div>
                 )}
                 <div className="pl-14 pt-2 cursor-pointer" onClick={OnCross}>
-                <RxCross2/>
+                  <RxCross2 />
                 </div>
               </div>
             </div>
@@ -236,7 +238,7 @@ const imageNameWithoutExt = imgName.split(".")[0];
               <GiAlliedStar className="h-10 w-10" color="#EAB308" />
             </div>
             <div className="flex justify-center mt-3">
-              <h3>Fast Conversion</h3>
+              <h3>User-friendly</h3>
             </div>
             <div className="flex justify-center text-center mt-5">
               <p className="text-slate-400">
@@ -259,8 +261,126 @@ const imageNameWithoutExt = imgName.split(".")[0];
               </p>
             </div>
           </div>
+          <div className="p-8">
+            <div className="flex justify-center">
+              <BiWorld className="h-10 w-10" color="#EAB308" />
+            </div>
+            <div className="flex justify-center mt-3">
+              <h3>Why Use An Online Image Converter?</h3>
+            </div>
+            <div className="flex justify-center text-center mt-5">
+              <p className="text-slate-400">
+                There are so many image formats out there, because each comes
+                with its own specifications. Sometimes, you need an image with a
+                low file size, sometimes you need one that can easily be scaled,
+                and sometimes you need one that supports transparency.
+              </p>
+            </div>
+          </div>
+          <div className="p-8">
+            <div className="flex justify-center">
+              <SiSemanticweb className="h-10 w-10" color="#EAB308" />
+            </div>
+            <div className="flex justify-center mt-3">
+              <h3>Are My Files Safe?</h3>
+            </div>
+            <div className="flex justify-center text-center mt-5">
+              <p className="text-slate-400">
+                Yes, at Img2Go, we make sure that your files are as safe as can
+                be. No thrid party has access to your images. All image
+                conversions and editing are handled by our servers so nobody has
+                a look at your files manually.
+              </p>
+            </div>
+          </div>
+          <div className="p-8">
+            <div className="flex justify-center">
+              <BiMobile className="h-10 w-10" color="#EAB308" />
+            </div>
+            <div className="flex justify-center mt-3">
+              <h3>Mobile Friendly Image Conversion</h3>
+            </div>
+            <div className="flex justify-center text-center mt-5">
+              <p className="text-slate-400">
+                You can use this service to convert JPG to PNG, SVG, GIF and
+                other image formats from literally anywhere – as long as you
+                have an internet connection. Img2Go was designed to be user
+                friendly and optimized for mobile phones and tablets as well.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+      <div className=" mt-20 mb-20 bg-blue-600">
+        <div className="md:ml-48 md:mr-48 pt-20">
+          <h1 className="text-2xl text-white font-bold">
+            How to Convert Images?
+          </h1>
+          <h2 className="pt-3 text-white font-normal">
+            1: Click the “Choose Files” button to upload your files.
+          </h2>
+          <h2 className="pt-3 text-white font-normal">
+            2: Select a target image format from the{" "}
+            <span className="font-bold">“Convert to”</span> drop-down list.
+          </h2>
+          <h2 className="pt-3 text-white font-normal">
+            3: Click on the blue <span className="font-bold">“Convert”</span>{" "}
+            button to start the conversion.
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-3 p-3 flex items-center mt-20 pb-10 md:ml-48 md:mr-48 ">
+          <div className="">
+            <div className="flex justify-center mt-3">
+              <SiConvertio className="h-10 w-10 mr-3" color="#EAB308" />
+
+              <h3 className="text-2xl text-white font-bold">
+                Convert Any Image
+              </h3>
+            </div>
+            <div className="flex justify-center text-center mt-3">
+              <p className="text-slate-400 text-white">
+                Convert more than 500+ image formats into popular formats like
+                JPG, PNG, WebP, and more. You can also convert camera RAW image
+                files.
+              </p>
+            </div>
+          </div>
+          <div className="">
+            <div className="flex justify-center ">
+              <BsFillImageFill className="h-10 w-10 mr-3" color="#EAB308" />
+              <h3 className="text-2xl text-white font-bold">Best Image </h3>
+            </div>
+            <div className="flex justify-center text-center mt-5">
+              <p className="text-slate-400 text-white">
+                Convert your images with perfect quality, size, and compression.
+                Plus, you can also batch convert images using this tool.
+              </p>
+            </div>
+          </div>
+          <div className="">
+            <div className="flex justify-center mt-10">
+              <RiSecurePaymentFill className="h-10 w-10 mr-3" color="#EAB308" />
+              <h3 className="text-2xl text-white font-bold">Free & Secure</h3>
+            </div>
+            <div className="flex justify-center text-center mt-5">
+              <p className="text-slate-400 text-white">
+                Our Image Converter is free and works on any web browser. We
+                guarantee file security and privacy. Files are protected with
+                256-bit SSL encryption and automatically deleted after 2 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+      <span class="pb-5 block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+        © 2023{" "}
+        <a href="/" class="hover:underline">
+          Converter
+        </a>
+        . All Rights Reserved.
+      </span>
     </div>
   );
 }
