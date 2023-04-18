@@ -21,6 +21,8 @@ function App() {
     setImgName(file.name);
     setFIle(file);
     console.log(file);
+    e.target.files=null;
+
   };
 
   const onConvertClick = () => {
