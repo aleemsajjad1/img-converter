@@ -1,10 +1,9 @@
 import { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import { GiConvergenceTarget } from "react-icons/gi";
 import { SiConvertio } from "react-icons/si";
 import { GiAlliedStar } from "react-icons/gi";
 import { TfiGallery } from "react-icons/tfi";
+import {RxCross2} from "react-icons/rx";
 import { ConvrtFunction } from "./service";
 import { saveAs } from "file-saver";
 
@@ -21,6 +20,7 @@ function App() {
     const file = e.target.files[0];
     setImgName(file.name);
     setFIle(file);
+    console.log(file);
   };
 
   const onConvertClick = () => {
@@ -45,8 +45,17 @@ function App() {
   };
 
   const donloadImage = () => {
-    saveAs(ImageUrl,imgName+'.'+toConvert);
+const imageNameWithoutExt = imgName.split(".")[0];
+    saveAs(ImageUrl,imageNameWithoutExt+'.'+toConvert);
   };
+  const OnCross=()=>{
+    setFIle("");
+    setImageUrl(false);
+    setImgName("");
+    setInfo("Ready");
+    setToConvert("");
+    setLoader(false);
+  }
 
   return (
     <div className="bg-gray-50 ">
@@ -120,6 +129,8 @@ function App() {
               name="file_upload"
               className="hidden"
               onChange={onChnageImage}
+              accept=".jpg,.png,.gif,.avif,.tiff,.svg,.webp"
+
             />
           </label>
         </div>
@@ -191,8 +202,12 @@ function App() {
                         Convert
                       </button>
                     )}
+
                   </div>
                 )}
+                <div className="pl-14 pt-2 cursor-pointer" onClick={OnCross}>
+                <RxCross2/>
+                </div>
               </div>
             </div>
           </div>
