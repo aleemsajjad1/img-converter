@@ -15,7 +15,7 @@ import Header from "../components/header";
 
 function JPG() {
   const [imgName, setImgName] = useState();
-  const [toConvert, setToConvert] = useState();
+  const [toConvert, setToConvert] = useState("jpg");
   const [file, setFIle] = useState();
   const [loaader, setLoader] = useState(false);
   const [ImageUrl, setImageUrl] = useState(false);

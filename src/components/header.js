@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { GiConvergenceTarget } from "react-icons/gi";
-import { BrowserRouter, Link } from "react-router-dom";
-
+import {Link} from "react-router-dom";
 function Header() {
   return (
     <div className="bg-gray-50 ">
@@ -46,11 +44,11 @@ function Header() {
         data-te-navbar-ref
       >
         <div class="flex w-full flex-wrap items-center justify-between px-3">
-          <a href="#">
+          <Link to="/">
             <span class="text-3xl italic font-extrabold text-blue-600 flex">
               <GiConvergenceTarget className="mt-1 mr-3" /> Converter
             </span>
-          </a>
+          </Link>
           <div class="flex items-center">
             <button
               class="border-0 bg-transparent px-2 text-xl leading-none transition-shadow duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:hidden"

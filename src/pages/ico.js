@@ -15,7 +15,7 @@ import Header from "../components/header";
 
 function ICO() {
   const [imgName, setImgName] = useState();
-  const [toConvert, setToConvert] = useState();
+  const [toConvert, setToConvert] = useState("ico");
   const [file, setFIle] = useState();
   const [loaader, setLoader] = useState(false);
   const [ImageUrl, setImageUrl] = useState(false);
