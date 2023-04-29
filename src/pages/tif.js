@@ -12,6 +12,7 @@ import { RxCross2 } from "react-icons/rx";
 import { ConvrtFunction } from "../service";
 import { saveAs } from "file-saver";
 import Header from "../components/header";
+import SecondHeader from "../components/SecondHeader";
 
 function TIF() {
   const [imgName, setImgName] = useState();
@@ -67,6 +68,7 @@ function TIF() {
   return (
     <div className="bg-gray-50 ">
       <Header />
+      <SecondHeader type="TIFF"/>
       <div className="md:ml-36 mt-20 md:mr-36">
         <div className="flex justify-center">
           <h1 className="text-3xl font-bold text-yellow-500 italic">
