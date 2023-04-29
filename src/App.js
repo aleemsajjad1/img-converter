@@ -81,7 +81,7 @@ function App() {
           <Route path="/" element={<Home />} />
           
           {/* png */}
-          <Route path="png" element={<Png />} />
+          <Route path="convert-to-png" element={<Png />} />
           <Route path="jpg-to-png" element={<JpgToPng />} />
           <Route path="gif-to-png" element={<GifToPng />} />
           <Route path="avif-to-png" element={<AvifToPng />} />
@@ -91,7 +91,7 @@ function App() {
           <Route path="ico-to-png" element={<IcoToPng />} />
 
           {/* avif */}
-          <Route path="avif" element={<Avif />} />
+          <Route path="convert-to-avif" element={<Avif />} />
           <Route path="jpg-to-avif" element={<JpgToAvif />} />
           <Route path="gif-to-avif" element={<GifToAvif />} />
           <Route path="png-to-avif" element={<PngToAvif />} />
@@ -101,7 +101,7 @@ function App() {
           <Route path="ico-to-avif" element={<IcoToAvif />} />
 
           {/* gif */}
-          <Route path="gif" element={<Gif />} />
+          <Route path="convert-to-gif" element={<Gif />} />
           <Route path="jpg-to-gif" element={<JpgToGif />} />
           <Route path="png-to-gif" element={<PngToGif />} />
           <Route path="avif-to-gif" element={<AvifToGif />} />
@@ -111,7 +111,7 @@ function App() {
           <Route path="ico-to-gif" element={<IcoToGif />} />
 
           {/* Ico */}
-          <Route path="ico" element={<Ico />} />
+          <Route path="convert-to-ico" element={<Ico />} />
           <Route path="jpg-to-ico" element={<JpgToIco />} />
           <Route path="png-to-ico" element={<PngToIco />} />
           <Route path="avif-to-ico" element={<AvifToIco />} />
@@ -121,7 +121,7 @@ function App() {
           <Route path="gif-to-ico" element={<GifToIco />} />
 
           {/* Jpg */}
-          <Route path="jpg" element={<Jpg />} />
+          <Route path="convert-to-jpg" element={<Jpg />} />
           <Route path="gif-to-jpg" element={<GifToJpg />} />
           <Route path="png-to-jpg" element={<PngToJpg />} />
           <Route path="avif-to-jpg" element={<AvifToJpg />} />
@@ -131,7 +131,7 @@ function App() {
           <Route path="ico-to-jpg" element={<IcoToJpg />} />
 
           {/* svg */}
-          <Route path="svg" element={<Svg />} />
+          <Route path="convert-to-svg" element={<Svg />} />
           <Route path="gif-to-svg" element={<GifToSvg />} />
           <Route path="png-to-svg" element={<PngToSvg />} />
           <Route path="avif-to-svg" element={<AvifToSvg />} />
@@ -141,7 +141,7 @@ function App() {
           <Route path="ico-to-svg" element={<IcoToSvg />} />
 
           {/* tiff */}
-          <Route path="tif" element={<Tif />} />
+          <Route path="convert-to-tif" element={<Tif />} />
           <Route path="gif-to-tiff" element={<GifToTiff />} />
           <Route path="png-to-tiff" element={<PngToTiff />} />
           <Route path="avif-to-tiff" element={<AvifToTiff />} />
@@ -151,7 +151,7 @@ function App() {
           <Route path="ico-to-tiff" element={<IcoToTiff />} />
 
           {/* Webp */}
-          <Route path="webp" element={<Webp />} />
+          <Route path="convert-to-webp" element={<Webp />} />
           <Route path="gif-to-webp" element={<GifToWebp />} />
           <Route path="png-to-webp" element={<PngToWebp />} />
           <Route path="avif-to-webp" element={<AvifToWebp />} />
