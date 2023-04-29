@@ -1,15 +1,27 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import MobileDrawer from "./MobileDrawer";
+import SecondHeaderList from "./SecondHeaderList";
 function SecondHeader(props) {
+  const [open,setOpen]=useState(false);
+
+  const handledrawer=()=>{
+    setOpen(true);
+  }
+  const onClose=()=>{
+    setOpen(false);
+  }
   return (
     <div className="bg-gray-50 border-t ">
       <nav
-        className="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start"
+        className="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700  dark:text-neutral-200 md:flex-wrap md:justify-start"
         data-te-navbar-ref
       >
         <div className="flex w-full flex-wrap items-center justify-between px-3">
+          
           <div className="flex items-center">
             <button
-              className="border-0 bg-transparent px-2 text-xl leading-none transition-shadow duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:hidden"
+            onClick={handledrawer}
+              className="border-0  bg-transparent px-2 text-xl leading-none transition-shadow duration-150 ease-in-out text-neutral-700  lg:hidden"
               type="button"
               data-te-collapse-init
               data-te-target="#navbarSupportedContentX"
@@ -41,91 +53,20 @@ function SecondHeader(props) {
             id="navbarSupportedContentX"
             data-te-collapse-item
           >
-            <ul
+             <ul
               className="mr-auto flex flex-col lg:flex-row pl-10 m-auto"
               data-te-navbar-nav-ref
             >
-              {props.type !== "Jpg" && (
-                <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                  <Link
-                    to={'/jpg-to-'+props.type.toLowerCase()}
-                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  >
-                    JPG to {props.type}
-                  </Link>
-                </li>
-              )}
-              {props.type !== "Png" && (
-                <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                  <Link
-                    to={'/png-to-'+props.type.toLowerCase()}
-                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  >
-                    PNG to {props.type}
-                  </Link>
-                </li>
-              )}
-              {props.type !== "Gif" && (
-                <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                  <Link
-                    to={'/gif-to-'+props.type.toLowerCase()}
-                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  >
-                    GIF to {props.type}
-                  </Link>
-                </li>
-              )}
-              {props.type !== "Avif" && (
-                <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                  <Link
-                    to={'/avif-to-'+props.type.toLowerCase()}
-                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  >
-                    AVIF to {props.type}
-                  </Link>
-                </li>
-              )}
-              {props.type !== "Tiff" && (
-                <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                  <Link
-                    to={'/tiff-to-'+props.type.toLowerCase()}
-                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  >
-                    TIFF to {props.type}
-                  </Link>
-                </li>
-              )}
-              {props.type !== "Svg" && (
-                <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                  <Link
-                    to={'/svg-to-'+props.type.toLowerCase()}
-                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  >
-                    SVG to {props.type}
-                  </Link>
-                </li>
-              )}
-              {props.type !== "Webp" && (
-                <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                  <Link
-                    to={'/webp-to-'+props.type.toLowerCase()}
-                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  >
-                    WEBP to {props.type}
-                  </Link>
-                </li>
-              )}
-              {props.type !== "Ico" && (
-                <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                  <Link
-                    to={'/ico-to-'+props.type.toLowerCase()}
-                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  >
-                    ICO to {props.type}
-                  </Link>
-                </li>
-              )}
+              <SecondHeaderList props={props} />
             </ul>
+            <MobileDrawer open={open} onClose={onClose}>
+            <ul
+              className="mr-auto flex flex-col px-5"
+              data-te-navbar-nav-ref
+            >
+              <SecondHeaderList props={props} />
+            </ul>
+            </MobileDrawer>
           </div>
         </div>
       </nav>
