@@ -8,7 +8,7 @@ import SecondHeader from "./SecondHeader";
 
 function Converter (props){
     const [imgName, setImgName] = useState();
-    const [toConvert, setToConvert] = useState(props.to);
+    const [toConvert, setToConvert] = useState();
     const [file, setFIle] = useState();
     const [loaader, setLoader] = useState(false);
     const [ImageUrl, setImageUrl] = useState(false);
