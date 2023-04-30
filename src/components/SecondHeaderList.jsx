@@ -15,7 +15,7 @@ const SecondHeaderList = ({props}) => {
                 </li>
               )}
               
-              {/* {props.type === "Jpg" && (
+              {props.type === "Jpg" && (
                 <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                   <Link
                     to={'/heic-to-'+props.type.toLowerCase()}
@@ -34,7 +34,7 @@ const SecondHeaderList = ({props}) => {
                     HEIC to {props.type}
                   </Link>
                 </li>
-              )} */}
+              )}
               {props.type !== "Png" && (
                 <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                   <Link
