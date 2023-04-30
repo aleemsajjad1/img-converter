@@ -75,6 +75,9 @@ const onClose=()=>{
              </ul>
             </MobileDrawer>
           </div>
+          <div className="mr-3">
+            <Link to="/subscription">Subscription</Link>
+          </div>
         </div>
       </nav>
     </div>
