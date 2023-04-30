@@ -18,7 +18,7 @@ function Converter (props){
   
     const onChnageImage = (e) => {
       const file = e.target.files[0];
-      setImgName(file.name);
+     file&& setImgName(file.name);
       setFIle(file);
       console.log(file);
       e.target.files = null;
@@ -28,6 +28,7 @@ function Converter (props){
       setInfo("Converting...");
       setLoader(true);
       form.append("image", file);
+      console.log("form",form);
       ConvrtFunction(toConvert, form).then((result) => {
         console.log(result);
         if (result.status) {

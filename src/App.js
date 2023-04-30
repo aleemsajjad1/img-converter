@@ -74,6 +74,7 @@ import AvifToWebp from "./pages/webp/AvifToWebp";
 import SvgToWebp from "./pages/webp/SvgToWebp";
 import TiffToWebp from "./pages/webp/TiffToWebp";
 import IcoToWebp from "./pages/webp/IcoToWebp";
+import HeicToPng from "./pages/png/HeicToPng";
 
 function App() {
   return (
@@ -85,6 +86,7 @@ function App() {
           
           {/* png */}
           <Route path="convert-to-png" element={<Png />} />
+          <Route path="heic-to-png" element={<HeicToPng />} />
           <Route path="jpg-to-png" element={<JpgToPng />} />
           <Route path="gif-to-png" element={<GifToPng />} />
           <Route path="avif-to-png" element={<AvifToPng />} />
