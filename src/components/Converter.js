@@ -5,6 +5,7 @@ import { saveAs } from "file-saver";
 import ConverterContent from "../components/ConverterContent";
 import { Types } from "../const";
 import SecondHeader from "./SecondHeader";
+import Resizer from "react-image-file-resizer";
 
 function Converter (props){
     const [imgName, setImgName] = useState();
@@ -15,22 +16,35 @@ function Converter (props){
     const [info, setInfo] = useState("Ready");
     var form = new FormData();
     const from = props.from ? props.from : ''
-  
-    const onChnageImage = (e) => {
-      const file = e.target.files[0];
-     file&& setImgName(file.name);
-      setFIle(file);
-      console.log(file);
+
+    // const resizer=async(files)=>{
+    //   return new Promise((resolve) => {
+    //      Resizer.imageFileResizer(
+    //        files,
+    //        1024,
+    //        1024,
+    //        "JPEG",
+    //        100,
+    //        0,
+    //        (uri) => {
+    //          resolve(uri);
+    //        },
+    //        "base64"
+    //      );
+    //      });
+    //  }
+    const onChnageImage = async(e) => {
+      const files = e.target.files[0];
+     files&& setImgName(files.name);
+      setFIle(files);
       e.target.files = null;
     };
-  
-    const onConvertClick = () => {
+
+    const onConvertClick = async() => {
       setInfo("Converting...");
       setLoader(true);
       form.append("image", file);
-      console.log("form",form);
       ConvrtFunction(toConvert, form).then((result) => {
-        console.log(result);
         if (result.status) {
           setLoader(false);
           setImageUrl(result.url);
@@ -39,13 +53,18 @@ function Converter (props){
           setLoader(false);
           alert("Something went wrong");
         }
+      }).catch((error)=>{
+        setInfo("Error");
+        setLoader(false);
+        console.log(error);
       });
+
     };
-  
+
     const onChangeToConvert = (e) => {
       setToConvert(e.target.value);
     };
-  
+
     const donloadImage = () => {
       const imageNameWithoutExt = imgName.split(".")[0];
       saveAs(ImageUrl, imageNameWithoutExt + "." + toConvert);
@@ -61,16 +80,16 @@ function Converter (props){
     return (<>
     <div className="md:ml-36 mt-20 md:mr-36">
         {
-        props.type !== 'Home' && 
+        props.type !== 'Home' &&
             <SecondHeader type={props.type} from={props.from} to={props.to}/>
             }
         <div className="flex justify-center mt-5">
           <h1 className="text-3xl font-bold text-yellow-500 italic">
           {
-        props.type !== 'Home' ? 
+        props.type !== 'Home' ?
             'Converte File '+ from +' to '+ props.type : 'File Converter'
             }
-            
+
           </h1>
         </div>
         <div className="flex justify-center">
@@ -137,7 +156,7 @@ function Converter (props){
                   onChange={onChangeToConvert}
                 >
                   <option value="">Plese Select</option>
-                  {props.type === "Home" 
+                  {props.type === "Home"
                     ? Types.map((r)=>(
                     <option value={r.value}>{r.name}</option>
                   )) :
