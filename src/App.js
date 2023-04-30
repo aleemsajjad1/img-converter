@@ -8,6 +8,7 @@ import Jpg from "./pages/jpg";
 import Svg from "./pages/svg";
 import Tif from "./pages/tif";
 import Webp from "./pages/webp";
+import Subscription from "./pages/subscription/subscription";
 
 import JpgToPng from "./pages/png/JpgToPng";
 import GifToPng from "./pages/png/GifToPng";
@@ -79,6 +80,7 @@ function App() {
       <Routes>
         <Route>
           <Route path="/" element={<Home />} />
+          <Route path="/subscription" element={<Subscription />} />
           
           {/* png */}
           <Route path="convert-to-png" element={<Png />} />
