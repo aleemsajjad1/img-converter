@@ -10,7 +10,7 @@ function Subscription() {
       
       <div className="grid md:grid-cols-3 gap-3 m-28">
         <div>
-          <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+          <div class="w-full max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
             <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
               Basic plan
             </h5>
@@ -165,7 +165,7 @@ function Subscription() {
           </div>
         </div>
         <div>
-          <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+          <div class="w-full max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
             <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
               Standard plan
             </h5>
@@ -320,7 +320,7 @@ function Subscription() {
           </div>
         </div>
         <div>
-          <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+          <div class="w-full max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
             <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
               Premiumn plan
             </h5>
