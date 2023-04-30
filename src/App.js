@@ -25,6 +25,7 @@ import SvgToGif from "./pages/gif/SvgToGif";
 import WebpToGif from "./pages/gif/WebpToGif";
 import IcoToGif from "./pages/gif/IcoToGif";
 
+import HeicToJpg from "./pages/jpg/Heictojpg";
 import GifToJpg from "./pages/jpg/GifToJpg";
 import PngToJpg from "./pages/jpg/PngToJpg";
 import AvifToJpg from "./pages/jpg/AvifTojpg";
@@ -129,6 +130,8 @@ function App() {
           <Route path="svg-to-jpg" element={<SvgToJpg />} />
           <Route path="webp-to-jpg" element={<WebpToJpg />} />
           <Route path="ico-to-jpg" element={<IcoToJpg />} />
+          <Route path="heic-to-jpg" element={<HeicToJpg />} />
+
 
           {/* svg */}
           <Route path="convert-to-svg" element={<Svg />} />

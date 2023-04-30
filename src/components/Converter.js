@@ -117,6 +117,7 @@ function Converter (props){
                   'svg': '.svg',
                   'webp': '.webp',
                   'ico': '.ico',
+                  'heic':".heic"
                 }[props.from]
               }
             />
