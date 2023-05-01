@@ -13,7 +13,7 @@ function SecondHeader(props) {
   return (
     <div className="bg-gray-50 border-t ">
       <nav
-        className="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700  dark:text-neutral-200 md:flex-wrap md:justify-start"
+        className=" flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700  dark:text-neutral-200 md:flex-wrap md:justify-start"
         data-te-navbar-ref
       >
         <div className="flex w-full flex-wrap items-center justify-between px-3">

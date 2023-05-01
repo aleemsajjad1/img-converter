@@ -139,14 +139,14 @@ function Converter(props) {
           <SecondHeader type={props.type} from={props.from} to={props.to} />
         )}
         <div className="flex justify-center mt-5">
-          <h1 className="text-3xl font-bold text-yellow-500 italic">
+          <h1 className="text-3xl font-bold text-black italic">
             {props.type !== "Home"
               ? "Converte File " + from + " to " + props.type
               : "File Converter"}
           </h1>
         </div>
         <div className="flex justify-center">
-          <h1 className="text-md font-bold text-yellow-500 italic">
+          <h1 className="text-md font-bold text-black italic">
             Convert your file to any formats
           </h1>
         </div>
@@ -170,7 +170,7 @@ function Converter(props) {
               </svg>
               <span className="font-medium text-gray-600">
                 Upload your file
-                <span className="text-yellow-500 underline">browse</span>
+                <span className="text-black underline">browse</span>
               </span>
             </span>
             <input

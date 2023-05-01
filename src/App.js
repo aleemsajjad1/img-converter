@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Home from "./pages/home";
 import Png from "./pages/png";
@@ -12,6 +12,7 @@ import Svg from "./pages/svg";
 import Tif from "./pages/tif";
 import Webp from "./pages/webp";
 import Subscription from "./pages/subscription/subscription";
+import Support from "./pages/support/support";
 
 import JpgToPng from "./pages/png/JpgToPng";
 import GifToPng from "./pages/png/GifToPng";
@@ -82,98 +83,98 @@ import HeicToPng from "./pages/png/HeicToPng";
 function App() {
   return (
     <>
-    <ToastContainer/>t
-    <BrowserRouter>
-      <Routes>
-        <Route>
-          <Route path="/" element={<Home />} />
-          <Route path="/subscription" element={<Subscription />} />
-          
-          {/* png */}
-          <Route path="convert-to-png" element={<Png />} />
-          <Route path="heic-to-png" element={<HeicToPng />} />
-          <Route path="jpg-to-png" element={<JpgToPng />} />
-          <Route path="gif-to-png" element={<GifToPng />} />
-          <Route path="avif-to-png" element={<AvifToPng />} />
-          <Route path="tiff-to-png" element={<TiffToPng />} />
-          <Route path="svg-to-png" element={<SvgToPng />} />
-          <Route path="webp-to-png" element={<WebpToPng />} />
-          <Route path="ico-to-png" element={<IcoToPng />} />
+      <ToastContainer />
+      <BrowserRouter>
+        <Routes>
+          <Route>
+            <Route path="/" element={<Home />} />
+            <Route path="/subscription" element={<Subscription />} />
+            <Route path="/support" element={<Support />} />
 
-          {/* avif */}
-          <Route path="convert-to-avif" element={<Avif />} />
-          <Route path="jpg-to-avif" element={<JpgToAvif />} />
-          <Route path="gif-to-avif" element={<GifToAvif />} />
-          <Route path="png-to-avif" element={<PngToAvif />} />
-          <Route path="tiff-to-avif" element={<TiffToAvif />} />
-          <Route path="svg-to-avif" element={<SvgToAvif />} />
-          <Route path="webp-to-avif" element={<WebpToAvif />} />
-          <Route path="ico-to-avif" element={<IcoToAvif />} />
+            {/* png */}
+            <Route path="convert-to-png" element={<Png />} />
+            <Route path="heic-to-png" element={<HeicToPng />} />
+            <Route path="jpg-to-png" element={<JpgToPng />} />
+            <Route path="gif-to-png" element={<GifToPng />} />
+            <Route path="avif-to-png" element={<AvifToPng />} />
+            <Route path="tiff-to-png" element={<TiffToPng />} />
+            <Route path="svg-to-png" element={<SvgToPng />} />
+            <Route path="webp-to-png" element={<WebpToPng />} />
+            <Route path="ico-to-png" element={<IcoToPng />} />
 
-          {/* gif */}
-          <Route path="convert-to-gif" element={<Gif />} />
-          <Route path="jpg-to-gif" element={<JpgToGif />} />
-          <Route path="png-to-gif" element={<PngToGif />} />
-          <Route path="avif-to-gif" element={<AvifToGif />} />
-          <Route path="tiff-to-gif" element={<TiffToGif />} />
-          <Route path="svg-to-gif" element={<SvgToGif />} />
-          <Route path="webp-to-gif" element={<WebpToGif />} />
-          <Route path="ico-to-gif" element={<IcoToGif />} />
+            {/* avif */}
+            <Route path="convert-to-avif" element={<Avif />} />
+            <Route path="jpg-to-avif" element={<JpgToAvif />} />
+            <Route path="gif-to-avif" element={<GifToAvif />} />
+            <Route path="png-to-avif" element={<PngToAvif />} />
+            <Route path="tiff-to-avif" element={<TiffToAvif />} />
+            <Route path="svg-to-avif" element={<SvgToAvif />} />
+            <Route path="webp-to-avif" element={<WebpToAvif />} />
+            <Route path="ico-to-avif" element={<IcoToAvif />} />
 
-          {/* Ico */}
-          <Route path="convert-to-ico" element={<Ico />} />
-          <Route path="jpg-to-ico" element={<JpgToIco />} />
-          <Route path="png-to-ico" element={<PngToIco />} />
-          <Route path="avif-to-ico" element={<AvifToIco />} />
-          <Route path="tiff-to-ico" element={<TiffToIco />} />
-          <Route path="svg-to-ico" element={<SvgToIco />} />
-          <Route path="webp-to-ico" element={<WebpToIco />} />
-          <Route path="gif-to-ico" element={<GifToIco />} />
+            {/* gif */}
+            <Route path="convert-to-gif" element={<Gif />} />
+            <Route path="jpg-to-gif" element={<JpgToGif />} />
+            <Route path="png-to-gif" element={<PngToGif />} />
+            <Route path="avif-to-gif" element={<AvifToGif />} />
+            <Route path="tiff-to-gif" element={<TiffToGif />} />
+            <Route path="svg-to-gif" element={<SvgToGif />} />
+            <Route path="webp-to-gif" element={<WebpToGif />} />
+            <Route path="ico-to-gif" element={<IcoToGif />} />
 
-          {/* Jpg */}
-          <Route path="convert-to-jpg" element={<Jpg />} />
-          <Route path="gif-to-jpg" element={<GifToJpg />} />
-          <Route path="png-to-jpg" element={<PngToJpg />} />
-          <Route path="avif-to-jpg" element={<AvifToJpg />} />
-          <Route path="tiff-to-jpg" element={<TiffToJpg />} />
-          <Route path="svg-to-jpg" element={<SvgToJpg />} />
-          <Route path="webp-to-jpg" element={<WebpToJpg />} />
-          <Route path="ico-to-jpg" element={<IcoToJpg />} />
-          <Route path="heic-to-jpg" element={<HeicToJpg />} />
+            {/* Ico */}
+            <Route path="convert-to-ico" element={<Ico />} />
+            <Route path="jpg-to-ico" element={<JpgToIco />} />
+            <Route path="png-to-ico" element={<PngToIco />} />
+            <Route path="avif-to-ico" element={<AvifToIco />} />
+            <Route path="tiff-to-ico" element={<TiffToIco />} />
+            <Route path="svg-to-ico" element={<SvgToIco />} />
+            <Route path="webp-to-ico" element={<WebpToIco />} />
+            <Route path="gif-to-ico" element={<GifToIco />} />
 
+            {/* Jpg */}
+            <Route path="convert-to-jpg" element={<Jpg />} />
+            <Route path="gif-to-jpg" element={<GifToJpg />} />
+            <Route path="png-to-jpg" element={<PngToJpg />} />
+            <Route path="avif-to-jpg" element={<AvifToJpg />} />
+            <Route path="tiff-to-jpg" element={<TiffToJpg />} />
+            <Route path="svg-to-jpg" element={<SvgToJpg />} />
+            <Route path="webp-to-jpg" element={<WebpToJpg />} />
+            <Route path="ico-to-jpg" element={<IcoToJpg />} />
+            <Route path="heic-to-jpg" element={<HeicToJpg />} />
 
-          {/* svg */}
-          <Route path="convert-to-svg" element={<Svg />} />
-          <Route path="gif-to-svg" element={<GifToSvg />} />
-          <Route path="png-to-svg" element={<PngToSvg />} />
-          <Route path="avif-to-svg" element={<AvifToSvg />} />
-          <Route path="tiff-to-svg" element={<TiffToSvg />} />
-          <Route path="jpg-to-svg" element={<JpgToSvg />} />
-          <Route path="webp-to-svg" element={<WebpToSvg />} />
-          <Route path="ico-to-svg" element={<IcoToSvg />} />
+            {/* svg */}
+            <Route path="convert-to-svg" element={<Svg />} />
+            <Route path="gif-to-svg" element={<GifToSvg />} />
+            <Route path="png-to-svg" element={<PngToSvg />} />
+            <Route path="avif-to-svg" element={<AvifToSvg />} />
+            <Route path="tiff-to-svg" element={<TiffToSvg />} />
+            <Route path="jpg-to-svg" element={<JpgToSvg />} />
+            <Route path="webp-to-svg" element={<WebpToSvg />} />
+            <Route path="ico-to-svg" element={<IcoToSvg />} />
 
-          {/* tiff */}
-          <Route path="convert-to-tif" element={<Tif />} />
-          <Route path="gif-to-tiff" element={<GifToTiff />} />
-          <Route path="png-to-tiff" element={<PngToTiff />} />
-          <Route path="avif-to-tiff" element={<AvifToTiff />} />
-          <Route path="svg-to-tiff" element={<SvgToTiff />} />
-          <Route path="jpg-to-tiff" element={<JpgToTiff />} />
-          <Route path="webp-to-tiff" element={<WebpToTiff />} />
-          <Route path="ico-to-tiff" element={<IcoToTiff />} />
+            {/* tiff */}
+            <Route path="convert-to-tif" element={<Tif />} />
+            <Route path="gif-to-tiff" element={<GifToTiff />} />
+            <Route path="png-to-tiff" element={<PngToTiff />} />
+            <Route path="avif-to-tiff" element={<AvifToTiff />} />
+            <Route path="svg-to-tiff" element={<SvgToTiff />} />
+            <Route path="jpg-to-tiff" element={<JpgToTiff />} />
+            <Route path="webp-to-tiff" element={<WebpToTiff />} />
+            <Route path="ico-to-tiff" element={<IcoToTiff />} />
 
-          {/* Webp */}
-          <Route path="convert-to-webp" element={<Webp />} />
-          <Route path="gif-to-webp" element={<GifToWebp />} />
-          <Route path="png-to-webp" element={<PngToWebp />} />
-          <Route path="avif-to-webp" element={<AvifToWebp />} />
-          <Route path="svg-to-webp" element={<SvgToWebp />} />
-          <Route path="jpg-to-webp" element={<JpgToWebp />} />
-          <Route path="tiff-to-webp" element={<TiffToWebp />} />
-          <Route path="ico-to-webp" element={<IcoToWebp />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            {/* Webp */}
+            <Route path="convert-to-webp" element={<Webp />} />
+            <Route path="gif-to-webp" element={<GifToWebp />} />
+            <Route path="png-to-webp" element={<PngToWebp />} />
+            <Route path="avif-to-webp" element={<AvifToWebp />} />
+            <Route path="svg-to-webp" element={<SvgToWebp />} />
+            <Route path="jpg-to-webp" element={<JpgToWebp />} />
+            <Route path="tiff-to-webp" element={<TiffToWebp />} />
+            <Route path="ico-to-webp" element={<IcoToWebp />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

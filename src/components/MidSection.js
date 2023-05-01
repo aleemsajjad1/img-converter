@@ -25,7 +25,7 @@ return (<>
         <div className="grid md:grid-cols-3 gap-3 p-3 flex items-center mt-20 pb-10 md:ml-48 md:mr-48 ">
           <div className="">
             <div className="flex justify-center mt-3">
-              <SiConvertio className="h-10 w-10 mr-3" color="#EAB308" />
+              <SiConvertio className="h-10 w-10 mr-3" color="#ffff" />
 
               <h3 className="text-2xl text-white font-bold">
                 Convert Any Image
@@ -41,7 +41,7 @@ return (<>
           </div>
           <div className="">
             <div className="flex justify-center ">
-              <BsFillImageFill className="h-10 w-10 mr-3" color="#EAB308" />
+              <BsFillImageFill className="h-10 w-10 mr-3" color="#ffff" />
               <h3 className="text-2xl text-white font-bold">Best Image </h3>
             </div>
             <div className="flex justify-center text-center mt-5">
@@ -53,7 +53,7 @@ return (<>
           </div>
           <div className="">
             <div className="flex justify-center mt-10">
-              <RiSecurePaymentFill className="h-10 w-10 mr-3" color="#EAB308" />
+              <RiSecurePaymentFill className="h-10 w-10 mr-3" color="#ffff" />
               <h3 className="text-2xl text-white font-bold">Free & Secure</h3>
             </div>
             <div className="flex justify-center text-center mt-5">

@@ -10,25 +10,24 @@ function ConverterContent(){
     <div className="grid md:grid-cols-3 gap-3 p-3 flex items-center mt-20">
           <div className="p-8">
             <div className="flex justify-center">
-              <SiConvertio className="h-10 w-10" color="#EAB308" />
+              <SiConvertio className="h-10 w-10" color="#000000" />
             </div>
             <div className="flex justify-center mt-3">
-              <h3>Fast Conversion</h3>
+              <h3 className="font-bold">Fast Conversion</h3>
             </div>
             <div className="flex justify-center text-center mt-5">
               <p className="text-slate-400">
-                Convertio is a cloud-based solution which means that conversion
-                is done on our side and the tool doesn't slow down your
-                operating system.
+                Converter is a solution which means that conversion
+                is done on our side and the tool doesn't slow down.
               </p>
             </div>
           </div>
           <div className="p-8">
             <div className="flex justify-center">
-              <GiAlliedStar className="h-10 w-10" color="#EAB308" />
+              <GiAlliedStar className="h-10 w-10" color="#000000" />
             </div>
             <div className="flex justify-center mt-3">
-              <h3>User-friendly</h3>
+              <h3 className="font-bold">User-friendly</h3>
             </div>
             <div className="flex justify-center text-center mt-5">
               <p className="text-slate-400">
@@ -39,10 +38,10 @@ function ConverterContent(){
           </div>
           <div className="p-8">
             <div className="flex justify-center">
-              <TfiGallery className="h-10 w-10" color="#EAB308" />
+              <TfiGallery className="h-10 w-10" color="#000000" />
             </div>
             <div className="flex justify-center mt-3">
-              <h3>Support any format</h3>
+              <h3 className="font-bold">Support any format</h3>
             </div>
             <div className="flex justify-center text-center mt-5">
               <p className="text-slate-400">
@@ -53,26 +52,25 @@ function ConverterContent(){
           </div>
           <div className="p-8">
             <div className="flex justify-center">
-              <BiWorld className="h-10 w-10" color="#EAB308" />
+              <BiWorld className="h-10 w-10" color="#000000" />
             </div>
             <div className="flex justify-center mt-3">
-              <h3>Why Use An Online Image Converter?</h3>
+              <h3 className="font-bold">Why Use An Online Image Converter?</h3>
             </div>
             <div className="flex justify-center text-center mt-5">
               <p className="text-slate-400">
                 There are so many image formats out there, because each comes
                 with its own specifications. Sometimes, you need an image with a
-                low file size, sometimes you need one that can easily be scaled,
-                and sometimes you need one that supports transparency.
+                low file size, sometimes you need one that can easily be scaled.
               </p>
             </div>
           </div>
           <div className="p-8">
             <div className="flex justify-center">
-              <SiSemanticweb className="h-10 w-10" color="#EAB308" />
+              <SiSemanticweb className="h-10 w-10" color="#000000" />
             </div>
             <div className="flex justify-center mt-3">
-              <h3>Are My Files Safe?</h3>
+              <h3 className="font-bold">Are My Files Safe?</h3>
             </div>
             <div className="flex justify-center text-center mt-5">
               <p className="text-slate-400">
@@ -85,15 +83,14 @@ function ConverterContent(){
           </div>
           <div className="p-8">
             <div className="flex justify-center">
-              <BiMobile className="h-10 w-10" color="#EAB308" />
+              <BiMobile className="h-10 w-10" color="#000000" />
             </div>
             <div className="flex justify-center mt-3">
-              <h3>Mobile Friendly Image Conversion</h3>
+              <h3 className="font-bold">Mobile Friendly Image Conversion</h3>
             </div>
             <div className="flex justify-center text-center mt-5">
               <p className="text-slate-400">
-                You can use this service to convert JPG to PNG, SVG, GIF and
-                other image formats from literally anywhere – as long as you
+                You can use this service to convert image formats from literally anywhere – as long as you
                 have an internet connection. Img2Go was designed to be user
                 friendly and optimized for mobile phones and tablets as well.
               </p>
