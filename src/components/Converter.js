@@ -1,50 +1,104 @@
-import {React,useState} from "react";
+import { React, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { ConvrtFunction } from "../service";
 import { saveAs } from "file-saver";
 import ConverterContent from "../components/ConverterContent";
 import { Types } from "../const";
 import SecondHeader from "./SecondHeader";
-import Resizer from "react-image-file-resizer";
+import { toast } from "react-toastify";
+function Converter(props) {
+  const [imgName, setImgName] = useState("");
+  const [toConvert, setToConvert] = useState("");
+  const [file, setFIle] = useState();
+  const [loaader, setLoader] = useState(false);
+  const [ImageUrl, setImageUrl] = useState(false);
+  const [info, setInfo] = useState("Ready");
+  var form = new FormData();
+  const from = props.from ? props.from : "";
 
-function Converter (props){
-    const [imgName, setImgName] = useState();
-    const [toConvert, setToConvert] = useState();
-    const [file, setFIle] = useState();
-    const [loaader, setLoader] = useState(false);
-    const [ImageUrl, setImageUrl] = useState(false);
-    const [info, setInfo] = useState("Ready");
-    var form = new FormData();
-    const from = props.from ? props.from : ''
+  // const resizer=async(files)=>{
+  //   return new Promise((resolve) => {
+  //      Resizer.imageFileResizer(
+  //        files,
+  //        1024,
+  //        1024,
+  //        "JPEG",
+  //        100,
+  //        0,
+  //        (uri) => {
+  //          resolve(uri);
+  //        },
+  //        "base64"
+  //      );
+  //      });
+  //  }
+  const onChnageImage = async (e) => {
+    const files = e.target.files[0];
+    if (files.size > 4 * 1024 * 1024) {
+      // File size is more than 4 MB, show an error message
+      toast.error("Image Size Should Less Then 5mb");
+      setLoader(false);
+      return;
+    }
 
-    // const resizer=async(files)=>{
-    //   return new Promise((resolve) => {
-    //      Resizer.imageFileResizer(
-    //        files,
-    //        1024,
-    //        1024,
-    //        "JPEG",
-    //        100,
-    //        0,
-    //        (uri) => {
-    //          resolve(uri);
-    //        },
-    //        "base64"
-    //      );
-    //      });
-    //  }
-    const onChnageImage = async(e) => {
-      const files = e.target.files[0];
-     files&& setImgName(files.name);
-      setFIle(files);
-      e.target.files = null;
-    };
+    const allowedExtensions = [
+      ".jpg",
+      ".png",
+      ".gif",
+      ".avif",
+      ".tiff",
+      ".svg",
+      ".webp",
+    ];
+    if (
+      props.type === "Home" ||
+      props.type === "Avif" ||
+      props.type === "Tiff" ||
+      props.type === "Gif" ||
+      props.type === "Ico" ||
+      props.type === "Webp" ||
+      props.type === "Svg"
+    ) {
+      const fileExtension = files.name.split(".").pop().toLowerCase();
+      if (!allowedExtensions.includes(`.${fileExtension}`)) {
+        // File type is not allowed, show an error message
+        toast.error(`Only ${allowedExtensions.join(", ")} images are allowed`);
+        setLoader(false);
+        return;
+      }
+    } else if (props.type === "Png" || props.type === "Jpg") {
+      const allowExtensions = [
+        ".jpg",
+        ".png",
+        ".gif",
+        ".avif",
+        ".tiff",
+        ".svg",
+        ".webp",
+        ".heic",
+      ];
+      const fileExtension = files.name.split(".").pop().toLowerCase();
+      if (!allowExtensions.includes(`.${fileExtension}`)) {
+        // File type is not allowed, show an error message
+        toast.error(`Only ${allowedExtensions.join(", ")} images are allowed`);
+        setLoader(false);
+        return;
+      }
+    }
+    setImgName(files.name);
+    setFIle(files);
+    setInfo("Ready");
+    setLoader(false);
+    setImageUrl("");
+    e.target.files = null;
+  };
 
-    const onConvertClick = async() => {
-      setInfo("Converting...");
-      setLoader(true);
-      form.append("image", file);
-      ConvrtFunction(toConvert, form).then((result) => {
+  const onConvertClick = async () => {
+    setInfo("Converting...");
+    setLoader(true);
+    form.append("image", file);
+    ConvrtFunction(toConvert, form)
+      .then((result) => {
         if (result.status) {
           setLoader(false);
           setImageUrl(result.url);
@@ -53,43 +107,42 @@ function Converter (props){
           setLoader(false);
           alert("Something went wrong");
         }
-      }).catch((error)=>{
+      })
+      .catch((error) => {
+        toast.error("Image Conversion Error!Please Try again Later");
         setInfo("Error");
         setLoader(false);
         console.log(error);
       });
+  };
 
-    };
+  const onChangeToConvert = (e) => {
+    setToConvert(e.target.value);
+  };
 
-    const onChangeToConvert = (e) => {
-      setToConvert(e.target.value);
-    };
-
-    const donloadImage = () => {
-      const imageNameWithoutExt = imgName.split(".")[0];
-      saveAs(ImageUrl, imageNameWithoutExt + "." + toConvert);
-    };
-    const OnCross = () => {
-      setFIle("");
-      setImageUrl(false);
-      setImgName("");
-      setInfo("Ready");
-      setToConvert("");
-      setLoader(false);
-    };
-    return (<>
-    <div className="md:ml-36 mt-20 md:mr-36">
-        {
-        props.type !== 'Home' &&
-            <SecondHeader type={props.type} from={props.from} to={props.to}/>
-            }
+  const donloadImage = () => {
+    const imageNameWithoutExt = imgName.split(".")[0];
+    saveAs(ImageUrl, imageNameWithoutExt + "." + toConvert);
+  };
+  const OnCross = () => {
+    setFIle("");
+    setImageUrl(false);
+    setImgName("");
+    setInfo("Ready");
+    setToConvert("");
+    setLoader(false);
+  };
+  return (
+    <>
+      <div className="md:ml-36 mt-20 md:mr-36">
+        {props.type !== "Home" && (
+          <SecondHeader type={props.type} from={props.from} to={props.to} />
+        )}
         <div className="flex justify-center mt-5">
           <h1 className="text-3xl font-bold text-yellow-500 italic">
-          {
-        props.type !== 'Home' ?
-            'Converte File '+ from +' to '+ props.type : 'File Converter'
-            }
-
+            {props.type !== "Home"
+              ? "Converte File " + from + " to " + props.type
+              : "File Converter"}
           </h1>
         </div>
         <div className="flex justify-center">
@@ -125,20 +178,22 @@ function Converter (props){
               name="file_upload"
               className="hidden"
               onChange={onChnageImage}
-              accept={props.type === "Home" || !props.from
-              ?
-              ".jpg,.png,.gif,.avif,.tiff,.svg,.webp"
-              : {
-                  'jpg': '.jpg',
-                  'png': '.png',
-                  'gif': '.gif',
-                  'avif': '.avif',
-                  'tiff': '.tiff',
-                  'svg': '.svg',
-                  'webp': '.webp',
-                  'ico': '.ico',
-                  'heic':".heic"
-                }[props.from]
+              accept={
+                props.type === "Home" || !props.from
+                  ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp"
+                  : props.type === "Jpg"
+                  ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp,.heic"
+                  : {
+                      jpg: ".jpg",
+                      png: ".png",
+                      gif: ".gif",
+                      avif: ".avif",
+                      tiff: ".tiff",
+                      svg: ".svg",
+                      webp: ".webp",
+                      ico: ".ico",
+                      heic: ".heic",
+                    }[props.from]
               }
             />
           </label>
@@ -156,12 +211,13 @@ function Converter (props){
                   onChange={onChangeToConvert}
                 >
                   <option value="">Plese Select</option>
-                  {props.type === "Home"
-                    ? Types.map((r)=>(
-                    <option value={r.value}>{r.name}</option>
-                  )) :
-                    <option value={props.type}>{props.type.toUpperCase()}</option>
-                  }
+                  {props.type === "Home" ? (
+                    Types.map((r) => <option value={r.value}>{r.name}</option>)
+                  ) : (
+                    <option value={props.type}>
+                      {props.type.toUpperCase()}
+                    </option>
+                  )}
                 </select>
               </div>
               <div className="flex justify-center">
@@ -218,9 +274,10 @@ function Converter (props){
             </div>
           </div>
         )}
-      <ConverterContent/>
+        <ConverterContent />
       </div>
-    </>)
+    </>
+  );
 }
 
 export default Converter;

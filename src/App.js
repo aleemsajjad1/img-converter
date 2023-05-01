@@ -1,4 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Home from "./pages/home";
 import Png from "./pages/png";
 import Avif from "./pages/avif";
@@ -78,6 +81,8 @@ import HeicToPng from "./pages/png/HeicToPng";
 
 function App() {
   return (
+    <>
+    <ToastContainer/>t
     <BrowserRouter>
       <Routes>
         <Route>
@@ -169,6 +174,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </>
   );
 }
 
