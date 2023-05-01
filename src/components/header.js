@@ -92,10 +92,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { GiConvergenceTarget } from "react-icons/gi";
-
+import MobileDrawer from "./MobileDrawer";
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
+    const handledrawer = () => {
+      setOpen(true);
+    };
+    const onClose = () => {
+      setOpen(false);
+    };
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -103,25 +110,25 @@ function Header() {
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16">
+        <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/">
               <span className="text-3xl italic font-extrabold text-white flex">
                 <GiConvergenceTarget className="mt-1 mr-3" /> Converter
               </span>
             </Link>
-          </div>
-          <div className="hidden md:block">
+
+            <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
               <div className="relative ml-3">
                 <button
                   onClick={toggleDropdown}
                   className="relative flex block rounded-md bg-gray-800 p-2 focus:outline-none focus:bg-gray-700"
                 >
-                  <span className="text-white font-bold">Converter</span>
+                  <span className="text-white font-bold">Convert to</span>
                   <FontAwesomeIcon
                     color="#ffff"
-                    className="ml-2 mt-1"
+                    className="ml-2"
                     icon={faCaretDown}
                   />
                 </button>
@@ -151,7 +158,75 @@ function Header() {
               >
                 <span className="text-white font-bold">Subscription</span>
               </Link>
+            
             </div>
+          </div>
+          </div>
+         
+          <div className="flex items-center ">
+         <button
+              onClick={handledrawer}
+              className="border-0 bg-transparent px-2
+               text-xl leading-none transition-shadow 
+               duration-150 ease-in-out
+               text-white lg:hidden"
+              type="button"
+              data-te-collapse-init
+              data-te-target="#navbarSupportedContentX"
+              aria-controls="navbarSupportedContentX"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="[&>svg]:w-5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="h-7 w-7"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+              </span>
+            </button>
+            <MobileDrawer open={open} onClose={onClose}/>
+          </div>
+            <div
+            className="!visible hidden grow basis-[100%] items-center lg:!flex lg:basis-auto"
+            id="navbarSupportedContentX"
+            data-te-collapse-item
+          >
+            
+             <MobileDrawer open={open} onClose={onClose}>
+             <ul
+              className="mr-auto flex flex-col pl-5 text-gray-800 font-bold"
+              data-te-navbar-nav-ref
+            >
+             <HeaderList/>
+             <li>
+             <Link
+                to="/support"
+                className="relative p-2 flex  z-10 block rounded-md"
+              >
+                <button className="bg-gray-800 p-3 rounded-md text-white font-bold">Support</button>
+              </Link>
+              
+             </li>
+             <li>
+             <Link
+                to="/subscription"
+                className="relative  flex  z-10 block rounded-md 0 p-2"
+              >
+                <button className="bg-gray-800 p-3 rounded-md text-white font-bold">Subscription</button>
+              </Link>
+             </li>
+             </ul>
+            </MobileDrawer>
           </div>
         </div>
       </div>

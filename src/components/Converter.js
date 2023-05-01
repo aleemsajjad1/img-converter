@@ -13,6 +13,7 @@ function Converter(props) {
   const [loaader, setLoader] = useState(false);
   const [ImageUrl, setImageUrl] = useState(false);
   const [info, setInfo] = useState("Ready");
+  const [types,setTypes]=useState(Types);
   var form = new FormData();
   const from = props.from ? props.from : "";
 
@@ -60,6 +61,8 @@ function Converter(props) {
       props.type === "Svg"
     ) {
       const fileExtension = files.name.split(".").pop().toLowerCase();
+      const filteredTypes =Types&&Types.filter((type) => type.value !== fileExtension);
+      setTypes(filteredTypes);
       if (!allowedExtensions.includes(`.${fileExtension}`)) {
         // File type is not allowed, show an error message
         toast.error(`Only ${allowedExtensions.join(", ")} images are allowed`);
@@ -210,7 +213,7 @@ function Converter(props) {
                 >
                   <option value="">Plese Select</option>
                   {props.type === "Home" ? (
-                    Types.map((r) => <option value={r.value}>{r.name}</option>)
+                   types&&types.map((r) => <option value={r.value}>{r.name}</option>)
                   ) : (
                     <option value={props.type}>
                       {props.type.toUpperCase()}
