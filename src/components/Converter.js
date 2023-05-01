@@ -181,8 +181,6 @@ function Converter(props) {
               accept={
                 props.type === "Home" || !props.from
                   ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp"
-                  : props.type === "Jpg"
-                  ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp,.heic"
                   : {
                       jpg: ".jpg",
                       png: ".png",
