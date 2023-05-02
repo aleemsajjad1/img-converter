@@ -50,6 +50,7 @@ function Converter(props) {
       ".tiff",
       ".svg",
       ".webp",
+      ".jpeg"
     ];
     if (
       props.type === "Home" ||
@@ -183,7 +184,7 @@ function Converter(props) {
               onChange={onChnageImage}
               accept={
                 props.type === "Home" || !props.from
-                  ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp"
+                  ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp,.jpeg"
                   : {
                       jpg: ".jpg",
                       png: ".png",
