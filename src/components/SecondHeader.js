@@ -61,7 +61,7 @@ function SecondHeader(props) {
             </ul>
             <MobileDrawer open={open} onClose={onClose}>
             <ul
-              className="mr-auto flex flex-col px-5"
+              className="mr-auto flex flex-col px-5 text-gray-800 font-bold"
               data-te-navbar-nav-ref
             >
               <SecondHeaderList props={props} />

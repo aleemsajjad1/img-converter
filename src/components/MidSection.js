@@ -5,7 +5,7 @@ import { SiConvertio } from "react-icons/si";
 function MidSection(){
 return (<>
       <div className=" mt-20 mb-20 bg-gray-800">
-        <div className="md:ml-48 md:mr-48 pt-20">
+        <div className="md:ml-48 ml-5 md:mr-48 pt-20">
           <h1 className="text-2xl text-white font-bold">
             How to Convert Images?
           </h1>
