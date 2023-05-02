@@ -80,6 +80,7 @@ function Converter(props) {
         ".svg",
         ".webp",
         ".heic",
+        ".jpeg"
       ];
       const fileExtension = files.name.split(".").pop().toLowerCase();
       if (!allowExtensions.includes(`.${fileExtension}`)) {
@@ -145,14 +146,14 @@ function Converter(props) {
         <div className="flex justify-center mt-5">
           <h1 className="text-3xl font-bold text-black italic">
             {props.type !== "Home"
-              ? "Converte File " + from + " to " + props.type
+              ? "Convert File " + from + " to " + props.type
               : "File Converter"}
           </h1>
         </div>
         <div className="flex justify-center">
-          <h1 className="text-md font-bold text-black italic">
+        {props.type==="Home"?  <h1 className="text-md font-bold text-black italic">
             Convert your file to any formats
-          </h1>
+          </h1>:""}
         </div>
 
         <div className="mt-4">
@@ -195,6 +196,7 @@ function Converter(props) {
                       webp: ".webp",
                       ico: ".ico",
                       heic: ".heic",
+                      jpeg:".jpeg"
                     }[props.from]
               }
             />

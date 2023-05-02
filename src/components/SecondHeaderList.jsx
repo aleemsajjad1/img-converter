@@ -4,7 +4,17 @@ const SecondHeaderList = ({props}) => {
   return (
    <>
    
-              {props.type !== "Jpg" && (
+              {props.type !== "Jpeg" && (
+                <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                  <Link
+                    to={'/jpeg-to-'+props.type.toLowerCase()}
+                    className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30  dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                  >
+                    JPEG to {props.type}
+                  </Link>
+                </li>
+              )}
+               {props.type !== "Jpg" && (
                 <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                   <Link
                     to={'/jpg-to-'+props.type.toLowerCase()}
