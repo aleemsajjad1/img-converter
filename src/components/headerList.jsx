@@ -19,6 +19,17 @@ const HeaderList = () => {
         role="menuitem"
       >
         <Link
+          to="/heic"
+          className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30  dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+        >
+         HEIC
+        </Link>
+      </a>
+      <a
+        className="block px-2 py-1 text-sm text-gray-700 hover:bg-gray-100"
+        role="menuitem"
+      >
+        <Link
           to="/convert-to-png"
           className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30  dark:focus:text-white lg:p-2 [&.active]:text-black/90"
         >

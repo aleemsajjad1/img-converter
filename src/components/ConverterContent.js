@@ -74,7 +74,7 @@ function ConverterContent(){
             </div>
             <div className="flex justify-center text-center mt-5">
               <p className="text-slate-400">
-                Yes, at Img2Go, we make sure that your files are as safe as can
+                Yes, at our Website, we make sure that your files are as safe as can
                 be. No thrid party has access to your images. All image
                 conversions and editing are handled by our servers so nobody has
                 a look at your files manually.

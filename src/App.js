@@ -88,6 +88,7 @@ import SvgToWebp from "./pages/webp/SvgToWebp";
 import TiffToWebp from "./pages/webp/TiffToWebp";
 import IcoToWebp from "./pages/webp/IcoToWebp";
 
+import HEIC from "./pages/heic";
 
 
 function App() {
@@ -190,6 +191,10 @@ function App() {
             <Route path="tiff-to-webp" element={<TiffToWebp />} />
             <Route path="ico-to-webp" element={<IcoToWebp />} />
             <Route path="jpeg-to-webp" element={<JpegToWebp />} />
+
+
+            {/* Heic */}
+            <Route path="heic" element={<HEIC />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -16,7 +16,14 @@ function Converter(props) {
   const [types,setTypes]=useState(Types);
   var form = new FormData();
   const from = props.from ? props.from : "";
-
+  const HeicFormt=[{
+    name:"JPG",
+    value:"jpg"
+  },
+  {
+    name: 'PNG',
+    value: 'png'
+}]
   // const resizer=async(files)=>{
   //   return new Promise((resolve) => {
   //      Resizer.imageFileResizer(
@@ -145,14 +152,14 @@ function Converter(props) {
         )}
         <div className="flex justify-center mt-5">
           <h1 className="text-3xl font-bold text-black italic">
-            {props.type !== "Home"
-              ? "Convert File " + from + " to " + props.type
-              : "File Converter"}
+            {props.type !== "Home" &&props.type !=="Heic"
+              ? "Convert Your  " + from + " File to " + props.type
+            :props.type==="Heic"? "Convert Your Heic File": "Image File Converter"}
           </h1>
         </div>
         <div className="flex justify-center">
         {props.type==="Home"?  <h1 className="text-md font-bold text-black italic">
-            Convert your file to any formats
+            Convert your Image to any formats
           </h1>:""}
         </div>
 
@@ -184,6 +191,7 @@ function Converter(props) {
               className="hidden"
               onChange={onChnageImage}
               accept={
+                props.type==="Heic"? ".heic":
                 props.type === "Home" || !props.from
                   ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp,.jpeg"
                   : {
@@ -217,9 +225,11 @@ function Converter(props) {
                   <option value="">Plese Select</option>
                   {props.type === "Home" ? (
                    types&&types.map((r) => <option value={r.value}>{r.name}</option>)
-                  ) : (
+                  ) :props.type==="Heic"?
+                  HeicFormt&&HeicFormt.map((r) => <option value={r.value}>{r.name}</option>)
+                  : (
                     <option value={props.type}>
-                      {props.type.toUpperCase()}
+                      {props.type.toLowerCase()}
                     </option>
                   )}
                 </select>
