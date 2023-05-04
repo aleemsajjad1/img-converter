@@ -33,6 +33,15 @@ const SecondHeaderList = ({props}) => {
                   {props.type} to Png
                 </Link>
               </li>
+              <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <Link
+                  to={'/heic-to-jpeg'}
+                  className="block text-sky-950 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30  dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                >
+                  {props.type} to Jpeg
+                </Link>
+              </li>
+              
               </>
               )}
                {props.type !== "Jpg"&& props.type !== "Heic" && (

@@ -16,13 +16,17 @@ function Converter(props) {
   const [types,setTypes]=useState(Types);
   var form = new FormData();
   const from = props.from ? props.from : "";
+  const to= props.to? props.to : "";
   const HeicFormt=[{
     name:"JPG",
     value:"jpg"
   },
   {
     name: 'PNG',
-    value: 'png'
+    value: 'png',
+},  {
+  name: 'JPEG',
+  value: 'jpeg',
 }]
   // const resizer=async(files)=>{
   //   return new Promise((resolve) => {
@@ -134,7 +138,7 @@ function Converter(props) {
 
   const donloadImage = () => {
     const imageNameWithoutExt = imgName.split(".")[0];
-    saveAs(ImageUrl, imageNameWithoutExt + "." + toConvert);
+    saveAs(ImageUrl, imageNameWithoutExt + "." +toConvert);
   };
   const OnCross = () => {
     setFIle("");
@@ -223,7 +227,10 @@ function Converter(props) {
                   onChange={onChangeToConvert}
                 >
                   <option value="">Plese Select</option>
-                  {props.type === "Home" ? (
+                  {props.to==="jpeg"?<option value={props.to}>
+                      {props.to}
+                    </option>:
+                  props.type === "Home" ? (
                    types&&types.map((r) => <option value={r.value}>{r.name}</option>)
                   ) :props.type==="Heic"?
                   HeicFormt&&HeicFormt.map((r) => <option value={r.value}>{r.name}</option>)
