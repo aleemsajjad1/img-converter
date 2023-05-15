@@ -114,7 +114,7 @@ function Header() {
           <div className="flex items-center">
             <Link to="/">
               <span className="text-3xl italic font-extrabold text-white flex">
-                <GiConvergenceTarget className="mt-1 mr-3" /> Converter
+                <GiConvergenceTarget className="mt-1 mr-3" /> Converterzu
               </span>
             </Link>
 
