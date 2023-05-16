@@ -4,12 +4,12 @@ const fs=require("fs");
 
 const paths = [];
 
-const addRoutePath = (path) => {
-  paths.push({ path, priority:1 });
+const addRoutePath = (path,priority=0.5) => {
+  paths.push({ path, priority });
 };
 
 // png
-addRoutePath('/');
+addRoutePath('/',1);
 addRoutePath('/subscription');
 addRoutePath('/support');
 addRoutePath('/convert-to-png');
@@ -88,7 +88,6 @@ addRoutePath('/ico-to-webp');
 addRoutePath('/jpeg-to-webp');
 addRoutePath('/heic');
 addRoutePath('/heic-to-jpeg');
-addRoutePath('*');
 
 
 const generateSitemap = async () => {
