@@ -90,6 +90,7 @@ import IcoToWebp from "./pages/webp/IcoToWebp";
 
 import HEIC from "./pages/heic";
 import HeicToJpeg from "./pages/heic/HeicToJpeg";
+import NotFound from "./pages/404";
 
 
 function App() {
@@ -197,6 +198,8 @@ function App() {
             {/* Heic */}
             <Route path="heic" element={<HEIC />} />
             <Route path="heic-to-jpeg" element={<HeicToJpeg />} />
+
+            <Route path="*" element={<NotFound />} />
 
           </Route>
         </Routes>
