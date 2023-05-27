@@ -8,26 +8,35 @@ import SecondHeader from "./SecondHeader";
 import { toast } from "react-toastify";
 function Converter(props) {
   const [imgName, setImgName] = useState("");
-  const [toConvert, setToConvert] = useState("");
+  const [toConvert, setToConvert] = useState([]);
   const [file, setFIle] = useState();
   const [loaader, setLoader] = useState(false);
+  const [multipleFiles, setMultipleFiles] = useState([
+    {
+      file: {},
+      url: "",
+    },
+  ]);
   const [ImageUrl, setImageUrl] = useState(false);
   const [info, setInfo] = useState("Ready");
-  const [types,setTypes]=useState(Types);
+  const [types, setTypes] = useState(Types);
   var form = new FormData();
   const from = props.from ? props.from : "";
-  const to= props.to? props.to : "";
-  const HeicFormt=[{
-    name:"JPG",
-    value:"jpg"
-  },
-  {
-    name: 'PNG',
-    value: 'png',
-},  {
-  name: 'JPEG',
-  value: 'jpeg',
-}]
+  const to = props.to ? props.to : "";
+  const HeicFormt = [
+    {
+      name: "JPG",
+      value: "jpg",
+    },
+    {
+      name: "PNG",
+      value: "png",
+    },
+    {
+      name: "JPEG",
+      value: "jpeg",
+    },
+  ];
   // const resizer=async(files)=>{
   //   return new Promise((resolve) => {
   //      Resizer.imageFileResizer(
@@ -44,7 +53,19 @@ function Converter(props) {
   //      );
   //      });
   //  }
-  const onChnageImage = async (e) => {
+  console.log("====================================");
+  console.log(multipleFiles);
+  console.log("====================================");
+  const onChnageImage = (e, index) => {
+    const filesArray = Array.from(e.target.files);
+
+    const updatedMultipleFiles = filesArray.map((file) => ({
+      file: file,
+      url: "",
+    }));
+
+    setMultipleFiles(updatedMultipleFiles);
+
     const files = e.target.files[0];
     if (files.size > 4 * 1024 * 1024) {
       // File size is more than 4 MB, show an error message
@@ -61,7 +82,7 @@ function Converter(props) {
       ".tiff",
       ".svg",
       ".webp",
-      ".jpeg"
+      ".jpeg",
     ];
     if (
       props.type === "Home" ||
@@ -73,7 +94,9 @@ function Converter(props) {
       props.type === "Svg"
     ) {
       const fileExtension = files.name.split(".").pop().toLowerCase();
-      const filteredTypes =Types&&Types.filter((type) => type.value !== fileExtension);
+      const filteredTypes =
+        Types && Types.filter((type) => type.value !== fileExtension);
+
       setTypes(filteredTypes);
       if (!allowedExtensions.includes(`.${fileExtension}`)) {
         // File type is not allowed, show an error message
@@ -91,7 +114,7 @@ function Converter(props) {
         ".svg",
         ".webp",
         ".heic",
-        ".jpeg"
+        ".jpeg",
       ];
       const fileExtension = files.name.split(".").pop().toLowerCase();
       if (!allowExtensions.includes(`.${fileExtension}`)) {
@@ -112,33 +135,43 @@ function Converter(props) {
   const onConvertClick = async () => {
     setInfo("Converting...");
     setLoader(true);
-    form.append("image", file);
-    ConvrtFunction(toConvert, form)
-      .then((result) => {
-        if (result.status) {
+    for (let i = 0; i < multipleFiles.length; i++) {
+      form.append("image", multipleFiles[i].file);
+
+      ConvrtFunction(toConvert[i], form)
+        .then((result) => {
+          if (result.status) {
+            setLoader(false);
+            setMultipleFiles([...multipleFiles, { url: result.url }]);
+            setImageUrl(result.url);
+
+            setInfo("Finished");
+          } else {
+            setLoader(false);
+            alert("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          toast.error("Image Conversion Error!Please Try again Later");
+          setInfo("Error");
           setLoader(false);
-          setImageUrl(result.url);
-          setInfo("Finished");
-        } else {
-          setLoader(false);
-          alert("Something went wrong");
-        }
-      })
-      .catch((error) => {
-        toast.error("Image Conversion Error!Please Try again Later");
-        setInfo("Error");
-        setLoader(false);
-        console.log(error);
-      });
+          console.log(error);
+        });
+    }
   };
 
-  const onChangeToConvert = (e) => {
-    setToConvert(e.target.value);
+  const onChangeToConvert = (e, index) => {
+    const newarr = [...toConvert];
+    newarr[index] = e.target.value;
+    setToConvert(newarr);
   };
 
-  const donloadImage = () => {
-    const imageNameWithoutExt = imgName.split(".")[0];
-    saveAs(ImageUrl, imageNameWithoutExt + "." +toConvert);
+  const donloadImage = (res) => {
+    console.log("====================================");
+    console.log(res);
+    console.log("====================================");
+    // const imageNameWithoutExt = imgName.split(".")[0];
+    // saveAs(ImageUrl, imageNameWithoutExt + "." + toConvert);
   };
   const OnCross = () => {
     setFIle("");
@@ -148,6 +181,7 @@ function Converter(props) {
     setToConvert("");
     setLoader(false);
   };
+
   return (
     <>
       <div className="md:ml-36 mt-20 md:mr-36">
@@ -156,15 +190,21 @@ function Converter(props) {
         )}
         <div className="flex justify-center mt-5">
           <h1 className="text-3xl font-bold text-black italic">
-            {props.type !== "Home" &&props.type !=="Heic"
+            {props.type !== "Home" && props.type !== "Heic"
               ? "Convert Your  " + from + " File to " + props.type
-            :props.type==="Heic"? "Convert Your Heic File": "Image File Converter"}
+              : props.type === "Heic"
+              ? "Convert Your Heic File"
+              : "Image File Converter"}
           </h1>
         </div>
         <div className="flex justify-center">
-        {props.type==="Home"?  <h1 className="text-md font-bold text-black italic">
-            Convert your Image to any formats
-          </h1>:""}
+          {props.type === "Home" ? (
+            <h1 className="text-md font-bold text-black italic">
+              Convert your Image to any formats
+            </h1>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="mt-4">
@@ -193,10 +233,12 @@ function Converter(props) {
               type="file"
               name="file_upload"
               className="hidden"
+              multiple
               onChange={onChnageImage}
               accept={
-                props.type==="Heic"? ".heic":
-                props.type === "Home" || !props.from
+                props.type === "Heic"
+                  ? ".heic"
+                  : props.type === "Home" || !props.from
                   ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp,.jpeg"
                   : {
                       jpg: ".jpg",
@@ -208,7 +250,7 @@ function Converter(props) {
                       webp: ".webp",
                       ico: ".ico",
                       heic: ".heic",
-                      jpeg:".jpeg"
+                      jpeg: ".jpeg",
                     }[props.from]
               }
             />
@@ -216,85 +258,98 @@ function Converter(props) {
         </div>
 
         {imgName && (
-          <div className="bg-gray-200 rounded mt-3">
-            <div className="grid md:grid-cols-4 gap-4 p-3 flex items-center">
-              <div className="align-middle flex">{imgName}</div>
-              <div className="flex  justify-center">
-                <span className="pt-3 pr-3">To:</span>
-                <select
-                  id="small"
-                  className="block p-3 w-1/2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  onChange={onChangeToConvert}
-                >
-                  <option value="">Plese Select</option>
-                  {props.to==="jpeg"?<option value={props.to}>
-                      {props.to}
-                    </option>:
-                  props.type === "Home" ? (
-                   types&&types.map((r) => <option value={r.value}>{r.name}</option>)
-                  ) :props.type==="Heic"?
-                  HeicFormt&&HeicFormt.map((r) => <option value={r.value}>{r.name}</option>)
-                  : (
-                    <option value={props.type}>
-                      {props.type.toLowerCase()}
-                    </option>
-                  )}
-                </select>
-              </div>
-              <div className="flex justify-center">
-                <span className="bg-gray-800 text-white text-sm font-medium mr-2 px-2.5 py-0.5 rounded ">
-                  {info}
-                </span>
-              </div>
-
-              <div className="flex justify-center">
-                {loaader ? (
-                  <div role="status">
-                    <svg
-                      aria-hidden="true"
-                      class="inline w-8 h-8 mr-2 text-gray-800 animate-spin"
-                      viewBox="0 0 100 101"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+          <div>
+            {multipleFiles.map((res, index) => (
+              <div className="bg-gray-200 rounded mt-3">
+                <div className="grid md:grid-cols-4 gap-4 p-3 flex items-center">
+                  {/* <div className="align-middle flex">{res.file.name}</div> */}
+                  <div className="flex  justify-center">
+                    <span className="pt-3 pr-3">To:</span>
+                    <select
+                      id="small"
+                      className="block p-3 w-1/2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      onChange={(e) => onChangeToConvert(e, index)}
                     >
-                      <path
-                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                        fill="currentColor"
-                      />
-                      <path
-                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                        fill="currentFill"
-                      />
-                    </svg>
-                    <span class="sr-only">Loading...</span>
+                      <option value="">Plese Select</option>
+                      {props.to === "jpeg" ? (
+                        <option value={props.to}>{props.to}</option>
+                      ) : props.type === "Home" ? (
+                        types &&
+                        types.map((r) => (
+                          <option value={r.value}>{r.name}</option>
+                        ))
+                      ) : props.type === "Heic" ? (
+                        HeicFormt &&
+                        HeicFormt.map((r) => (
+                          <option value={r.value}>{r.name}</option>
+                        ))
+                      ) : (
+                        <option value={props.type}>
+                          {props.type.toLowerCase()}
+                        </option>
+                      )}
+                    </select>
                   </div>
-                ) : (
-                  <div>
-                    {ImageUrl ? (
-                      <button
-                        class="bg-gray-800 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={donloadImage}
-                      >
-                        Download
-                      </button>
+                  <div className="flex justify-center">
+                    <span className="bg-gray-800 text-white text-sm font-medium mr-2 px-2.5 py-0.5 rounded ">
+                      {info}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-center">
+                    {loaader ? (
+                      <div role="status">
+                        <svg
+                          aria-hidden="true"
+                          class="inline w-8 h-8 mr-2 text-gray-800 animate-spin"
+                          viewBox="0 0 100 101"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                            fill="currentFill"
+                          />
+                        </svg>
+                        <span class="sr-only">Loading...</span>
+                      </div>
                     ) : (
-                      <button
-                        disabled={toConvert ? false : true}
-                        onClick={onConvertClick}
-                        class="bg-gray-800 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full"
-                      >
-                        Convert
-                      </button>
+                      <div>
+                        {ImageUrl && (
+                          <button
+                            class="bg-gray-800 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full"
+                            onClick={() => donloadImage(res.url)}
+                          >
+                            Download
+                          </button>
+                        )}
+                      </div>
                     )}
+                    <div
+                      className="pl-14 pt-2 cursor-pointer"
+                      onClick={OnCross}
+                    >
+                      <RxCross2 />
+                    </div>
                   </div>
-                )}
-                <div className="pl-14 pt-2 cursor-pointer" onClick={OnCross}>
-                  <RxCross2 />
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         )}
+        <div className="flex justify-end mt-5">
+          <button
+            disabled={toConvert ? false : true}
+            onClick={() => onConvertClick()}
+            class="bg-gray-800 hover:bg-gray-800 text-white font-bold py-3 px-5 rounded-full"
+          >
+            Convert
+          </button>
+        </div>
         <ConverterContent />
       </div>
     </>
