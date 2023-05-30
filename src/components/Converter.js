@@ -142,7 +142,12 @@ function Converter(props) {
         .then((result) => {
           if (result.status) {
             setLoader(false);
-            setMultipleFiles([...multipleFiles, { url: result.url }]);
+            setMultipleFiles((prevFiles) => {
+              const updatedFiles = [...prevFiles];
+              updatedFiles[i] = { ...updatedFiles[i], url: result.url };
+              return updatedFiles;
+            });
+
             setImageUrl(result.url);
 
             setInfo("Finished");
@@ -166,22 +171,21 @@ function Converter(props) {
     setToConvert(newarr);
   };
 
-  const donloadImage = (res) => {
-    console.log("====================================");
-    console.log(res);
-    console.log("====================================");
-    // const imageNameWithoutExt = imgName.split(".")[0];
-    // saveAs(ImageUrl, imageNameWithoutExt + "." + toConvert);
+  const donloadImage = (res, name) => {
+    const imageNameWithoutExt = name.split(".")[0];
+    saveAs(res, imageNameWithoutExt);
   };
-  const OnCross = () => {
-    setFIle("");
-    setImageUrl(false);
-    setImgName("");
-    setInfo("Ready");
-    setToConvert("");
-    setLoader(false);
+  const OnCross = (indexx) => {
+    const filteredTypes =
+      multipleFiles && multipleFiles.filter((type, index) => index !== indexx);
+    setMultipleFiles(filteredTypes);
+    // setFIle("");
+    // setImageUrl(false);
+    // setImgName("");
+    // setInfo("Ready");
+    // setToConvert("");
+    // setLoader(false);
   };
-
   return (
     <>
       <div className="md:ml-36 mt-20 md:mr-36">
@@ -262,7 +266,7 @@ function Converter(props) {
             {multipleFiles.map((res, index) => (
               <div className="bg-gray-200 rounded mt-3">
                 <div className="grid md:grid-cols-4 gap-4 p-3 flex items-center">
-                  {/* <div className="align-middle flex">{res.file.name}</div> */}
+                  <div className="align-middle flex">{res.file.name}</div>
                   <div className="flex  justify-center">
                     <span className="pt-3 pr-3">To:</span>
                     <select
@@ -322,7 +326,7 @@ function Converter(props) {
                         {ImageUrl && (
                           <button
                             class="bg-gray-800 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full"
-                            onClick={() => donloadImage(res.url)}
+                            onClick={() => donloadImage(res.url, res.file.name)}
                           >
                             Download
                           </button>
@@ -331,7 +335,7 @@ function Converter(props) {
                     )}
                     <div
                       className="pl-14 pt-2 cursor-pointer"
-                      onClick={OnCross}
+                      onClick={() => OnCross(index)}
                     >
                       <RxCross2 />
                     </div>
