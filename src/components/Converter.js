@@ -6,8 +6,11 @@ import ConverterContent from "../components/ConverterContent";
 import { Types } from "../const";
 import SecondHeader from "./SecondHeader";
 import { toast } from "react-toastify";
+import Modal from "react-modal";
+
 function Converter(props) {
   const [imgName, setImgName] = useState("");
+  const [urlText, setUrlText] = useState("");
   const [toConvert, setToConvert] = useState([]);
   const [file, setFIle] = useState();
   const [loaader, setLoader] = useState(false);
@@ -17,9 +20,42 @@ function Converter(props) {
       url: "",
     },
   ]);
+  const [modalIsOpen, setModadlIsOpen] = useState(false);
   const [ImageUrl, setImageUrl] = useState(false);
   const [info, setInfo] = useState("Ready");
   const [types, setTypes] = useState(Types);
+  const [isOpen, setIsOpen] = useState(false);
+  const customStyles = {
+    content: {
+      top: "50%",
+      width: "500px",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#FFFFFF",
+    },
+  };
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setModadlIsOpen(false);
+  };
+
+  const openModal = () => {
+    setModadlIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
   var form = new FormData();
   const from = props.from ? props.from : "";
   const to = props.to ? props.to : "";
@@ -37,25 +73,7 @@ function Converter(props) {
       value: "jpeg",
     },
   ];
-  // const resizer=async(files)=>{
-  //   return new Promise((resolve) => {
-  //      Resizer.imageFileResizer(
-  //        files,
-  //        1024,
-  //        1024,
-  //        "JPEG",
-  //        100,
-  //        0,
-  //        (uri) => {
-  //          resolve(uri);
-  //        },
-  //        "base64"
-  //      );
-  //      });
-  //  }
-  console.log("====================================");
-  console.log(multipleFiles);
-  console.log("====================================");
+
   const onChnageImage = (e, index) => {
     const filesArray = Array.from(e.target.files);
 
@@ -186,6 +204,37 @@ function Converter(props) {
     // setToConvert("");
     // setLoader(false);
   };
+
+  const onChnageUrlText = (e) => {
+    setUrlText(e.target.value);
+  };
+
+  const onUrlConverrt = () => {
+    if (urlText) {
+      fetch(urlText)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const urlParts = urlText.split("/");
+          const fileName = urlParts[urlParts.length - 1];
+          const fileType = blob.type;
+          const file = new File([blob], fileName, { type: fileType });
+
+          setImgName(file.name);
+          const updatedFiles = [
+            {
+              file: file,
+              url: "",
+            },
+          ];
+          setMultipleFiles(updatedFiles);
+          setModadlIsOpen(false);
+        })
+        .catch((error) => {
+          console.error("Error converting image:", error);
+        });
+    }
+  };
+
   return (
     <>
       <div className="md:ml-36 mt-20 md:mr-36">
@@ -211,56 +260,139 @@ function Converter(props) {
           )}
         </div>
 
-        <div className="mt-4">
-          <label className="flex justify-center w-full h-40 px-4 transition bg-gray-100 border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+        <div className="mt-4 flex">
+          <div className="flex justify-center w-full h-40 px-4 transition bg-gray-100 border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
             <span className="flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 text-gray-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stsokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                />
-              </svg>
-              <span className="font-medium text-gray-600">
+              {/* <span className="font-medium text-gray-600">
                 Upload your file
                 <span className="text-black underline">browse</span>
-              </span>
-            </span>
-            <input
-              type="file"
-              name="file_upload"
-              className="hidden"
-              multiple
-              onChange={onChnageImage}
-              accept={
-                props.type === "Heic"
-                  ? ".heic"
-                  : props.type === "Home" || !props.from
-                  ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp,.jpeg"
-                  : {
-                      jpg: ".jpg",
-                      png: ".png",
-                      gif: ".gif",
-                      avif: ".avif",
-                      tiff: ".tiff",
-                      svg: ".svg",
-                      webp: ".webp",
-                      ico: ".ico",
-                      heic: ".heic",
-                      jpeg: ".jpeg",
-                    }[props.from]
-              }
-            />
-          </label>
-        </div>
+              </span> */}
+              <div className="relative">
+                <button
+                  id="dropdownHoverButton"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  onClick={toggleDropdown}
+                  className="text-white bg-slate-900 hover:bg-slate-900 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-salte-600 dark:hover:bg-salte-700 "
+                  type="button"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    />
+                  </svg>
 
+                  <span className="pl-2">Convert Image From</span>
+                  <svg
+                    className={`w-4 h-4 ml-2 ${
+                      isOpen ? "transform rotate-180" : ""
+                    }`}
+                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
+                  </svg>
+                </button>
+                {isOpen && (
+                  <div
+                    id="dropdownHover"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700"
+                  >
+                    <ul
+                      className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownHoverButton"
+                    >
+                      <label className="block px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                        <input
+                          type="file"
+                          name="file_upload"
+                          className="hidden"
+                          multiple
+                          onChange={onChnageImage}
+                          accept={
+                            props.type === "Heic"
+                              ? ".heic"
+                              : props.type === "Home" || !props.from
+                              ? ".jpg,.png,.gif,.avif,.tiff,.svg,.webp,.jpeg"
+                              : {
+                                  jpg: ".jpg",
+                                  png: ".png",
+                                  gif: ".gif",
+                                  avif: ".avif",
+                                  tiff: ".tiff",
+                                  svg: ".svg",
+                                  webp: ".webp",
+                                  ico: ".ico",
+                                  heic: ".heic",
+                                  jpeg: ".jpeg",
+                                }[props.from]
+                          }
+                        />
+                        Upload File
+                      </label>
+                      <label
+                        className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        onClick={openModal}
+                      >
+                        Open Modal
+                      </label>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </span>
+          </div>
+        </div>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <div className="text-lg">Add File By Url</div>
+
+          <div className="mt-3 mb-3">
+            <input
+              value={urlText}
+              className="w-full h-10 border-2 pl-3"
+              onChange={onChnageUrlText}
+              type="text"
+            />
+          </div>
+          <div className="flex justify-between">
+            <button
+              class="bg-gray-800 hover:bg-gray-800 text-white font-bold py-3 px-5 rounded-full"
+              onClick={closeModal}
+            >
+              Close
+            </button>
+            <button
+              class="bg-gray-800 hover:bg-gray-800 text-white font-bold py-3 px-5 rounded-full"
+              onClick={onUrlConverrt}
+            >
+              Save
+            </button>
+          </div>
+        </Modal>
         {imgName && (
           <div>
             {multipleFiles.map((res, index) => (
