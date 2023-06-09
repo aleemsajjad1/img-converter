@@ -228,6 +228,7 @@ function Converter(props) {
           ];
           setMultipleFiles(updatedFiles);
           setModadlIsOpen(false);
+          setUrlText("");
         })
         .catch((error) => {
           console.error("Error converting image:", error);
@@ -353,7 +354,7 @@ function Converter(props) {
                         className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                         onClick={openModal}
                       >
-                        Open Modal
+                        From Url
                       </label>
                     </ul>
                   </div>
